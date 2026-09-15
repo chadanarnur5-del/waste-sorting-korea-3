@@ -1,0 +1,18 @@
+{
+  "Seoul — Gangnam": {
+    "plastic": "Rinse the plastic container, remove the label and cap. Dispose in transparent bags.",
+    "paper": "Fold paper and cardboard, tie with string. Remove any tape from boxes.",
+    "glass": "Clear of any contents. Remove metal or plastic caps.",
+    "metal": "Flatten cans or tins. Dispose in metal collection bins.",
+    "organic": "Drain excess moisture. Dispose strictly in special yellow Food Waste Bags.",
+    "general": "General trash must be disposed strictly in special white General Trash Bags (종량제봉투)."
+  },
+  "Seoul — Mapo": {
+    "plastic": "Remove films and stickers. Clean plastic items should be placed in transparent bags.",
+    "paper": "Dry paper and cardboard. Dispose of wet or dirty paper in general waste.",
+    "glass": "Glass containers without cracks should be submitted separately. Wrap broken glass in thick paper and place in general waste.",
+    "metal": "Crush metal beverage and food cans before disposal.",
+    "organic": "Use designated Mapo district food waste bags.",
+    "general": "Use standard Mapo district general waste bags."
+  }
+}

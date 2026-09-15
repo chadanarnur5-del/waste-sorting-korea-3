@@ -1,0 +1,11 @@
+IMAGENET_TO_WASTE = {
+    # Существующие категории...
+    "water_bottle": "plastic", "pop_bottle": "plastic", "plastic_bag": "plastic",
+    "wine_bottle": "glass", "beer_bottle": "glass", "glass": "glass",
+    "can": "metal", "tin_can": "metal", "soup_bowl": "metal",
+    "banana": "organic", "apple": "organic", "orange": "organic",
+    
+    # Добавленные классы для бумаги и тетрадей:
+    "carton": "paper", "envelope": "paper", "paper_towel": "paper",
+    "notebook": "paper", "book": "paper", "binder": "paper", "comic_book": "paper"
+}
