@@ -223,7 +223,7 @@ selected_district = st.selectbox(t["select_district"], list(DISTRICT_RULES.keys(
 uploaded_file = st.file_uploader(t["upload_label"], type=["jpg", "jpeg", "png"])
 
 if uploaded_file is None:
-    st.info(f"*{t['tips_header']}*\n" + "\n".join([f"- {tip}" for tip in t["tips"]]))
+    st.info(f"**{t['tips_header']}**\n" + "\n".join([f"- {tip}" for tip in t["tips"]]))
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file).convert("RGB")
@@ -251,8 +251,8 @@ if uploaded_file is not None:
             )
             
             # Confidence Progress Bar
-            st.markdown(f"*{t['result_conf']} {confidence:.1f}%*")
+            st.markdown(f"**{t['result_conf']} {confidence:.1f}%**")
             st.progress(min(int(confidence), 100))
             
             # Instructions Output
-            st.info(f"*{t['result_rule']}*\n\n{rule_text}")
+            st.info(f"**{t['result_rule']}**\n\n{rule_text}")
