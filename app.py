@@ -11,7 +11,98 @@ st.set_page_config(
     layout="centered"
 )
 
-# --- 2. LOCAL DISTRICT RULES (EMBEDDED - 10 DISTRICTS) ---
+# --- 2. CUSTOM CSS INJECTION ---
+st.markdown("""
+    <style>
+    /* Hide Streamlit default branding */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    
+    /* Main container padding */
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+        max-width: 800px;
+    }
+    
+    /* Hero Banner Header */
+    .hero-header {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        padding: 30px;
+        border-radius: 16px;
+        color: white;
+        text-align: center;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+    .hero-header h1 {
+        color: #ffffff !important;
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+    .hero-header p {
+        color: #e0e7ff;
+        font-size: 1.05rem;
+        margin: 0;
+    }
+    
+    /* Input and Select Label Styling */
+    label {
+        font-weight: 600 !important;
+        color: #374151 !important;
+    }
+    
+    /* Custom Result Card */
+    .result-card {
+        padding: 20px;
+        border-radius: 14px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        transition: transform 0.2s ease-in-out;
+    }
+    .result-card h3 {
+        margin: 0 0 6px 0;
+        font-size: 1.4rem;
+    }
+    .result-card p {
+        margin: 0;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+    
+    /* Custom Progress Bar Wrapper */
+    .confidence-wrapper {
+        background-color: #f3f4f6;
+        border-radius: 10px;
+        padding: 4px;
+        margin-top: 8px;
+        margin-bottom: 20px;
+    }
+    .confidence-bar {
+        height: 12px;
+        border-radius: 8px;
+        background: linear-gradient(90deg, #4f46e5, #3b82f6);
+    }
+    
+    /* Tips Container */
+    .tips-box {
+        background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 18px;
+        margin-top: 15px;
+    }
+    .tips-box ul {
+        margin-bottom: 0;
+        padding-left: 20px;
+        color: #475569;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# --- 3. LOCAL DISTRICT RULES (EMBEDDED - 10 DISTRICTS) ---
 DISTRICT_RULES = {
     "Seoul — Gangnam": {
         "plastic": "Rinse transparent plastic bottles, remove labels and caps. Dispose in transparent bags.",
@@ -95,12 +186,12 @@ DISTRICT_RULES = {
     }
 }
 
-# --- 3. LOCALIZATION CONFIGURATION ---
+# --- 4. LOCALIZATION CONFIGURATION ---
 LOCALES = {
     "English": {
         "title": "♻️ Waste Sorter in South Korea",
-        "subtitle": "Upload a photo of an item to learn how to properly dispose of it according to Korean local district rules.",
-        "select_district": "📍 Select your district in Korea (10 Districts):",
+        "subtitle": "AI-Powered Recycling & Disposal Guide across 10 Korean Districts",
+        "select_district": "📍 Select your district in Korea:",
         "upload_label": "📸 Upload a photo of the item:",
         "uploaded_caption": "Uploaded Photo",
         "analyzing_spinner": "Analyzing image with AI model...",
@@ -126,8 +217,8 @@ LOCALES = {
     },
     "한국어": {
         "title": "♻️ 한국 분리수거 가이드",
-        "subtitle": "쓰레기 사진을 업로드하여 해당 지역의 올바른 분리배출 방법을 확인하세요.",
-        "select_district": "📍 거주하는 지역을 선택하세요 (10개 지역):",
+        "subtitle": "AI 기반 10개 지역 맞춤형 분리배출 안내 서비스",
+        "select_district": "📍 거주하는 지역을 선택하세요:",
         "upload_label": "📸 쓰레기 사진을 업로드하세요:",
         "uploaded_caption": "업로드된 사진",
         "analyzing_spinner": "인공지능 모델이 이미지를 분석 중입니다...",
@@ -155,15 +246,15 @@ LOCALES = {
 
 # Card Color Map for UI
 CATEGORY_COLORS = {
-    "plastic": {"bg": "#e6f4ea", "border": "#34a853", "label": "🟢 Plastic Recyclable"},
-    "paper": {"bg": "#e8f0fe", "border": "#4285f4", "label": "🔵 Paper / Cardboard Recyclable"},
-    "glass": {"bg": "#feefc3", "border": "#fbbc04", "label": "🟡 Glass Recyclable"},
-    "metal": {"bg": "#f1f3f4", "border": "#5f6368", "label": "⚪ Metal Recyclable"},
-    "organic": {"bg": "#fce8e6", "border": "#ea4335", "label": "🔴 Food Waste"},
-    "general": {"bg": "#f1f3f4", "border": "#9aa0a6", "label": "⚪ General Waste"}
+    "plastic": {"bg": "#edf7ed", "border": "#2e7d32", "text": "#1e4620", "label": "🟢 Plastic Recyclable"},
+    "paper": {"bg": "#eef2ff", "border": "#3730a3", "text": "#1e1b4b", "label": "🔵 Paper / Cardboard Recyclable"},
+    "glass": {"bg": "#fefce8", "border": "#ca8a04", "text": "#713f12", "label": "🟡 Glass Recyclable"},
+    "metal": {"bg": "#f3f4f6", "border": "#4b5563", "text": "#1f2937", "label": "⚪ Metal Recyclable"},
+    "organic": {"bg": "#fef2f2", "border": "#dc2626", "text": "#7f1d1d", "label": "🔴 Food Waste"},
+    "general": {"bg": "#f3f4f6", "border": "#6b7280", "text": "#374151", "label": "⚪ General Waste"}
 }
 
-# --- 4. AI MODEL INITIALIZATION ---
+# --- 5. AI MODEL INITIALIZATION ---
 @st.cache_resource
 def load_model():
     weights = MobileNet_V2_Weights.DEFAULT
@@ -179,7 +270,7 @@ IMAGENET_TO_WASTE = {
     # Plastic
     "water_bottle": "plastic", "pop_bottle": "plastic", "plastic_bag": "plastic",
     "water_jug": "plastic", "pill_bottle": "plastic",
-    # Paper & Cardboard (notebooks, books, documents)
+    # Paper & Cardboard
     "carton": "paper", "envelope": "paper", "paper_towel": "paper",
     "notebook": "paper", "book": "paper", "binder": "paper", "comic_book": "paper",
     "menu": "paper", "book_jacket": "paper", "web_site": "paper", "crossword": "paper",
@@ -207,23 +298,42 @@ def predict_waste_type(image):
                 
     return "general", float(top_prob[0]) * 100
 
-# --- 5. APPLICATION INTERFACE ---
-st.sidebar.title("Settings / 설정")
+# --- 6. APPLICATION INTERFACE ---
+
+# Sidebar Controls
+st.sidebar.markdown("### ⚙️ Settings / 설정")
 lang_choice = st.sidebar.selectbox("Language / 언어", list(LOCALES.keys()))
 t = LOCALES[lang_choice]
 
-st.title(t["title"])
-st.write(t["subtitle"])
-st.markdown("---")
+# Hero Banner
+st.markdown(
+    f"""
+    <div class="hero-header">
+        <h1>{t['title']}</h1>
+        <p>{t['subtitle']}</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
-# District Selection Dropdown
+# District Selection
 selected_district = st.selectbox(t["select_district"], list(DISTRICT_RULES.keys()))
 
 # File Upload
 uploaded_file = st.file_uploader(t["upload_label"], type=["jpg", "jpeg", "png"])
 
 if uploaded_file is None:
-    st.info(f"**{t['tips_header']}**\n" + "\n".join([f"- {tip}" for tip in t["tips"]]))
+    st.markdown(
+        f"""
+        <div class="tips-box">
+            <strong style="color:#1e293b;">{t['tips_header']}</strong>
+            <ul style="margin-top: 8px;">
+                {''.join([f'<li>{tip}</li>' for tip in t['tips']])}
+            </ul>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file).convert("RGB")
@@ -239,20 +349,28 @@ if uploaded_file is not None:
             
             st.success(t["analysis_complete"])
             
-            # Styled Card Output
+            # Custom Styled Result Card
             st.markdown(
                 f"""
-                <div style="background-color:{color_theme['bg']}; border-left: 6px solid {color_theme['border']}; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                    <h3 style="margin: 0; color: #1f2937;">{t['result_cat']} {cat_display}</h3>
-                    <p style="margin: 5px 0 0 0; font-weight: bold; color: {color_theme['border']};">{color_theme['label']}</p>
+                <div class="result-card" style="background-color:{color_theme['bg']}; border-left: 6px solid {color_theme['border']};">
+                    <h3 style="color:{color_theme['text']};">{t['result_cat']} {cat_display}</h3>
+                    <p style="color:{color_theme['border']};">{color_theme['label']}</p>
                 </div>
                 """,
                 unsafe_allow_html=True
             )
             
-            # Confidence Progress Bar
+            # Custom Confidence Bar
+            conf_int = min(int(confidence), 100)
             st.markdown(f"**{t['result_conf']} {confidence:.1f}%**")
-            st.progress(min(int(confidence), 100))
+            st.markdown(
+                f"""
+                <div class="confidence-wrapper">
+                    <div class="confidence-bar" style="width: {conf_int}%;"></div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
             
-            # Instructions Output
+            # Disposal Instructions
             st.info(f"**{t['result_rule']}**\n\n{rule_text}")
